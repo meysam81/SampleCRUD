@@ -1,24 +1,34 @@
 from http import HTTPStatus
-from flask import jsonify, request
+from flask import jsonify, request, Response
 
 from .app import app
 from .serialize import book_schema, book_schemas
-from .database import db, Books
+from .database import db, Book
 
 
 @app.route("/books", methods=["GET", "POST"], provide_automatic_options=False)
 def books():
     if request.method == "GET":
-        books = Books.query.all()
-        return book_schemas.dumps(books)
+        books = Book.query.all()
+
+        response = Response(
+            book_schemas.dumps(books),
+            status=HTTPStatus.OK,
+            content_type="application/json",
+        )
+
+        return response
 
     if request.method == "POST":
         if not request.is_json:
             return 'Only json requests are accepted', HTTPStatus.BAD_REQUEST
 
+        # validating user input
         book = book_schema.loads(request.data)
-        db.session.add(Books(name=book["name"]))
+
+        db.session.add(Book(name=book["name"]))
         db.session.commit()
+
         return book, HTTPStatus.CREATED
 
 
@@ -26,14 +36,20 @@ def books():
            provide_automatic_options=False)
 def book(book_id: int):
     if request.method == "GET":
-        book = Books.query.filter_by(id=book_id).first()
+        book = Book.query.filter_by(id=book_id).first()
         if not book:
             return jsonify(f'Not Found: {book_id}'), HTTPStatus.NOT_FOUND
 
-        return book_schema.dumps(book), HTTPStatus.OK
+        response = Response(
+            book_schema.dumps(book),
+            status=HTTPStatus.OK,
+            content_type="application/json",
+        )
+
+        return response
 
     if request.method == "DELETE":
-        result = Books.query.filter_by(id=book_id).delete()
+        result = Book.query.filter_by(id=book_id).delete()
         db.session.commit()
 
         if result:
@@ -47,12 +63,17 @@ def book(book_id: int):
 
         book = book_schema.loads(request.data)
 
-        result = Books.query.\
+        result = Book.query.\
             filter_by(id=book_id).\
             update(book)
         db.session.commit()
 
         if result:
-            return book, HTTPStatus.ACCEPTED
+            response = Response(
+                book,
+                status=HTTPStatus.ACCEPTED,
+                content_type="application/json",
+            )
+            return response
 
         return jsonify(f'Not Found: {book_id}'), HTTPStatus.NOT_FOUND
