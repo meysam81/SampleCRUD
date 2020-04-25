@@ -10,7 +10,7 @@ class TestPartialUpdateSingle:
 
         assert rv.status_code == expected_status
 
-    def test_partial_update_not_found(self, Book, app):
+    def test_partial_update_not_found(self, Book, app, books_db):
         Book.query.filter_by.return_value.update.return_value = None
 
         expected_status = HTTPStatus.NOT_FOUND
@@ -22,10 +22,9 @@ class TestPartialUpdateSingle:
         Book.query.filter_by.assert_called_once()
         Book.query.filter_by.return_value.update.assert_called_once()
 
-        from medium.books.views import db
-        db.session.commit.assert_called()
+        books_db.session.commit.assert_called_once()
 
-    def test_partial_update_succesful(self, Book, app):
+    def test_partial_update_succesful(self, Book, app, books_db):
         name, id_ = "book1", 1
         book = {"bookName": name}
         db_book = Book(id=id_, name=name)
@@ -40,5 +39,4 @@ class TestPartialUpdateSingle:
         Book.query.filter_by.assert_called_once()
         Book.query.filter_by.return_value.update.assert_called_once()
 
-        from medium.books.views import db
-        db.session.commit.assert_called()
+        books_db.session.commit.assert_called_once()

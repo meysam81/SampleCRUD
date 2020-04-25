@@ -4,7 +4,7 @@ from http import HTTPStatus
 class TestDeleteSingle:
     URL = "/api/v1/books/{}"
 
-    def test_delete_single_not_found(self, Book, app):
+    def test_delete_single_not_found(self, Book, app, books_db):
         Book.query.filter_by.return_value.delete.return_value = None
 
         expected_status = HTTPStatus.NOT_FOUND
@@ -15,10 +15,9 @@ class TestDeleteSingle:
         Book.query.filter_by.assert_called_once()
         Book.query.filter_by.return_value.delete.assert_called_once()
 
-        from medium.books.views import db
-        db.session.commit.assert_called()
+        books_db.session.commit.assert_called_once()
 
-    def test_delete_single_successful(self, Book, app):
+    def test_delete_single_successful(self, Book, app, books_db):
         Book.query.filter_by.return_value.delete.return_value = 1
 
         rv = app.delete(self.URL.format(1))
@@ -28,5 +27,4 @@ class TestDeleteSingle:
         Book.query.filter_by.assert_called_once()
         Book.query.filter_by.return_value.delete.assert_called_once()
 
-        from medium.books.views import db
-        db.session.commit.assert_called()
+        books_db.session.commit.assert_called_once()

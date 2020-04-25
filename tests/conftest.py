@@ -7,11 +7,6 @@ from unittest.mock import patch
 from medium.config import TestingConfig
 
 
-@pytest.fixture
-def Book():
-    return patch('medium.books.views.Book').start()
-
-
 @pytest.yield_fixture
 def app():
     """Flask Test App"""
