@@ -1,4 +1,7 @@
 # Sample CRUD
+
+[![Build Status](https://travis-ci.org/meysam81/SampleCRUD.svg?branch=master)](https://travis-ci.org/meysam81/SampleCRUD)
+
 This repository is an example of a good coding practice for several reasons.
 
 * It adheres to [Clean Architecture](https://medium.com/amerandish/clean-architecture-simplified-223f45e1a10),
