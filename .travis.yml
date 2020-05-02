@@ -3,5 +3,3 @@ python:
   - "3.8"
 script:
   - tox
-install:
-  - pip install .
