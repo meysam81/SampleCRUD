@@ -1,6 +1,7 @@
 # Sample CRUD
 
 [![Build Status](https://travis-ci.org/meysam81/SampleCRUD.svg?branch=master)](https://travis-ci.org/meysam81/SampleCRUD)
+[![Coverage Status](https://coveralls.io/repos/github/meysam81/SampleCRUD/badge.svg)](https://coveralls.io/github/meysam81/SampleCRUD)
 
 This repository is an example of a good coding practice for several reasons.
 
