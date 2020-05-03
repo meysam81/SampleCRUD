@@ -14,5 +14,9 @@ is optimized with the help of dozens of awesome developers. 🙏
 * It was written by a cool developer. Just kidding. Or am I? ©®😎
 * It has README for lord's sake. ✔
 
+The full story is explained
+[right here](https://medium.com/python-in-plain-english/how-to-write-tests-for-your-python-web-app-f6c6993abe36).
+Check it out for the explanation.
+
 Also shout out to the [best guys out there](https://github.com/gothinkster/flask-realworld-example-app)
 for sharing their knowledge with the rest of us. ™
