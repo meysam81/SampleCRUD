@@ -39,6 +39,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
+          tags: "${IMAGE_NAME,,}:${{ env.IMAGE_TAG }}"
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
