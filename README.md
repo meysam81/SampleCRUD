@@ -21,3 +21,22 @@ Check it out for the explanation.
 
 Also shout out to the [best guys out there](https://github.com/gothinkster/flask-realworld-example-app)
 for sharing their knowledge with the rest of us. ™
+
+## How to test the app?
+
+There are proper tests in place to check the integrity of the app. In order to run the
+automation tests, simply install and run `tox`.
+
+If you're interested in seeing the app live in action, run the following command in your
+terminal:
+
+```bash
+docker run --rm -p 8000:8000 ghcr.io/meysam81/sampleapp
+```
+
+And then, here are the URIs you can interact with the app:
+
+| URI                           | Methods                  |
+| ----------------------------- | ------------------------ |
+| `/api/v1/books`               | `GET`, `POST`            |
+| `/api/v1/books/<int:book_id>` | `GET`, `PATCH`, `DELETE` |
