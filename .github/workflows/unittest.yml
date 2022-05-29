@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - meysam/dev
 
 jobs:
   run-tests:

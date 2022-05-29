@@ -31,12 +31,12 @@ If you're interested in seeing the app live in action, run the following command
 terminal:
 
 ```bash
-docker run -p 8000:8000 ghcr.io/meysam81/sampleapp
+docker run --rm -p 8000:8000 ghcr.io/meysam81/sampleapp
 ```
 
 And then, here are the URIs you can interact with the app:
 
-| URI | Methods |
-| --- | --- |
-| `/api/v1/books` | `GET`, `POST` |
+| URI                           | Methods                  |
+| ----------------------------- | ------------------------ |
+| `/api/v1/books`               | `GET`, `POST`            |
 | `/api/v1/books/<int:book_id>` | `GET`, `PATCH`, `DELETE` |
